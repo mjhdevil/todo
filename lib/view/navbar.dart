@@ -26,7 +26,7 @@ class NavBar extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.blue,
         showSelectedLabels: true,
-        showUnselectedLabels: true,
+        showUnselectedLabels: true, // false 주면 라벨 사라짐
         onTap: (index){
           bottomNavgationBarController.changeIndex(index);
         },
