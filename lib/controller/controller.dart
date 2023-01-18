@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:todo/model/model.dart';
+
 // BottomNavigationBar 상태 관리를 위한 GetX controller
 class BottomNavigationBarController extends GetxController {
 
@@ -12,3 +14,8 @@ class BottomNavigationBarController extends GetxController {
     selectedIndex(index);
   }
 }
+
+class NoteController extends GetxController{
+  
+}
+
