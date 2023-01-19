@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:todo/controller/controller.dart';
 
 class Note extends StatefulWidget {
-  NoteController noteController =
-  Get.put(NoteController());
   Note({Key? key}) : super(key: key);
 
   @override
@@ -12,10 +10,8 @@ class Note extends StatefulWidget {
 }
 
 class _NoteState extends State<Note> {
-
   List todos = [];
   String input = "";
-
 
   @override
   void initState() {
@@ -27,6 +23,7 @@ class _NoteState extends State<Note> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Note"),
       ),
       floatingActionButton: FloatingActionButton(
@@ -42,21 +39,27 @@ class _NoteState extends State<Note> {
                       },
                     ),
                     actions: <Widget>[
-                      TextButton(onPressed: (){
-                        setState(() {
-                          todos.add(input); // 글쓰기 안했을경우 등록 수저해야함 ★★★
-                        });
-                        Navigator.of(context).pop();	// input 입력 후 창 닫히도록
-                      },
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              if(context != null){ // 글쓰기 안했을경우 등록 수저해야함 ★★★
+                                todos.add(input);
+                                Navigator.of(context).pop(); // input 입력 후 창 닫히도록
+                              }else{
+
+                              }
+
+                            });
+
+                          },
                           child: Text("등록")),
-                      TextButton(onPressed: (){
-                        setState(() {
-                        });
-                        Get.back();	// 닫기
-                      },
+                      TextButton(
+                          onPressed: () {
+                            setState(() {});
+                            Get.back(); // 닫기
+                          },
                           child: Text("닫기")),
-                    ]
-                );
+                    ]);
               });
         },
         child: Icon(
@@ -67,27 +70,24 @@ class _NoteState extends State<Note> {
       body: ListView.builder(
           itemCount: todos.length,
           itemBuilder: (BuildContext context, int index) {
-            return Dismissible(	// 삭제 버튼 및 기능 추가
+            return Dismissible(
+                // 삭제 버튼 및 기능 추가
                 key: Key(todos[index]),
                 child: Card(
                     elevation: 4,
                     margin: EdgeInsets.all(8),
-                    shape: RoundedRectangleBorder(borderRadius:
-                    BorderRadius.circular(8)
-                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
                     child: ListTile(
                       title: Text(todos[index]),
-                      trailing: IconButton(icon: Icon(
-                          Icons.delete,
-                          color: Colors.red
-                      ),
+                      trailing: IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
                             setState(() {
                               todos.removeAt(index);
                             });
                           }),
-                    )
-                ));
+                    )));
           }),
     );
   }
