@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:todo/model/model.dart';
 
 // BottomNavigationBar 상태 관리를 위한 GetX controller
+// 깃허브 테스트
 class BottomNavigationBarController extends GetxController {
 
 
