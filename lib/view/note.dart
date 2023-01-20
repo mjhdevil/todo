@@ -42,13 +42,8 @@ class _NoteState extends State<Note> {
                       TextButton(
                           onPressed: () {
                             setState(() {
-                              if(context != null){ // 글쓰기 안했을경우 등록 수저해야함 ★★★
                                 todos.add(input);
                                 Navigator.of(context).pop(); // input 입력 후 창 닫히도록
-                              }else{
-
-                              }
-
                             });
 
                           },
