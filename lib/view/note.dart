@@ -43,7 +43,8 @@ class _NoteState extends State<Note> {
                           onPressed: () {
                             setState(() {
                                 todos.add(input);
-                                Navigator.of(context).pop(); // input 입력 후 창 닫히도록
+                                Get.back();
+                                //Navigator.of(context).pop();
                             });
 
                           },
