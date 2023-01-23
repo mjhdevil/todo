@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:todo/view/homeadd.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -25,23 +26,24 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         title: Text('Home'),
       ),
-      body: Column(
-        children: [
-          TableCalendar(
-              focusedDay: _focusedDay ?? DateTime.now(),
-              firstDay: DateTime(2023),
-              lastDay: DateTime(2024),
+      body: TableCalendar(
+            focusedDay: _focusedDay ?? DateTime.now(),
+            firstDay: DateTime(2023),
+            lastDay: DateTime(2024),
             calendarFormat: CalendarFormat.month,
+            // 달 로 보여주기
             calendarStyle: CalendarStyle(
               selectedDecoration: BoxDecoration(
                 color: Colors.red,
                 shape: BoxShape.circle,
               ),
+
               todayDecoration: BoxDecoration(
-                color: Color(0xFF4DA9FF),
+                color: Colors.blue,
                 shape: BoxShape.circle,
               )
             ),
+
             selectedDayPredicate: (day){
                 return isSameDay(_selectedDay,day);
             },
@@ -50,14 +52,15 @@ class _HomeState extends State<Home> {
                   setState(() {
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;
+                    // 선택한 날짜
                   });
                 }
             },
           ),
-        ],
-      ),
+
+
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(Home()),
+        onPressed: () => Get.to(HomeAdd()),
         child: Icon(Icons.add),
             ),
           );
