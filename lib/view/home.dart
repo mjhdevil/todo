@@ -19,6 +19,13 @@ class _HomeState extends State<Home> {
 
   DateTime today = DateTime.now();
 
+
+  @override
+  void initState() {
+    super.initState();
+    TodoItem.add("흰둥이");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +65,65 @@ class _HomeState extends State<Home> {
             },
           ),
 
-
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(HomeAdd()),
-        child: Icon(Icons.add),
-            ),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                    title: Text("할일"),
+                    content: TextField(
+                      onChanged: (String value) {
+                        Todo = value;
+                      },
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              TodoItem.add(Todo);
+                              Get.back();
+                              //Navigator.of(context).pop();
+                            });
+
+                          },
+                          child: Text("등록")),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {});
+                            Get.back(); // 닫기
+                          },
+                          child: Text("닫기")),
+                    ]);
+              });
+        },
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      // bottomSheet: ListView.builder(
+      //     itemCount: todos.length,
+      //     itemBuilder: (BuildContext context, int index) {
+      //       return Dismissible(
+      //         // 삭제 버튼 및 기능 추가
+      //           key: Key(todos[index]),
+      //           child: Card(
+      //               elevation: 4,
+      //               margin: EdgeInsets.all(8),
+      //               shape: RoundedRectangleBorder(
+      //                   borderRadius: BorderRadius.circular(8)),
+      //               child: ListTile(
+      //                 title: Text(TodoItem[index]),
+      //                 trailing: IconButton(
+      //                     icon: Icon(Icons.delete, color: Colors.red),
+      //                     onPressed: () {
+      //                       setState(() {
+      //                         TodoItem.removeAt(index);
+      //                       });
+      //                     }),
+      //               )));
+      //     }),
           );
   }
 }
