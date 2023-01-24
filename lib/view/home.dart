@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:todo/view/homeadd.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -12,10 +11,14 @@ class Home extends StatefulWidget {
 
 
 class _HomeState extends State<Home> {
+  // DateTime? _selectedDay;
+  // DateTime? _focusedDay;
+   List TodoItem = [];
+   String Todo = "";
+
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  DateTime? _focusedDay;
-  List TodoItem = [];
-  String Todo = "";
 
   DateTime today = DateTime.now();
 
@@ -34,22 +37,24 @@ class _HomeState extends State<Home> {
         title: Text('Home'),
       ),
       body: TableCalendar(
-            focusedDay: _focusedDay ?? DateTime.now(),
+            focusedDay: _focusedDay,
             firstDay: DateTime(2023),
             lastDay: DateTime(2024),
-            calendarFormat: CalendarFormat.month,
-            // 달 로 보여주기
+            calendarFormat: _calendarFormat,
+            
             calendarStyle: CalendarStyle(
               selectedDecoration: BoxDecoration(
                 color: Colors.red,
                 shape: BoxShape.circle,
               ),
+              // 선택한 날짜 
 
               todayDecoration: BoxDecoration(
                 color: Colors.blue,
                 shape: BoxShape.circle,
               )
             ),
+            // 오늘날짜
 
             selectedDayPredicate: (day){
                 return isSameDay(_selectedDay,day);
@@ -63,6 +68,16 @@ class _HomeState extends State<Home> {
                   });
                 }
             },
+        onFormatChanged: (format){
+              if(_calendarFormat != format){
+                setState(() {
+                  _calendarFormat = format;
+                });
+              }
+        },
+        onPageChanged: (focusedDay){
+              _focusedDay = focusedDay;
+        },
           ),
 
       floatingActionButton: FloatingActionButton(
@@ -102,28 +117,6 @@ class _HomeState extends State<Home> {
           color: Colors.white,
         ),
       ),
-      // bottomSheet: ListView.builder(
-      //     itemCount: todos.length,
-      //     itemBuilder: (BuildContext context, int index) {
-      //       return Dismissible(
-      //         // 삭제 버튼 및 기능 추가
-      //           key: Key(todos[index]),
-      //           child: Card(
-      //               elevation: 4,
-      //               margin: EdgeInsets.all(8),
-      //               shape: RoundedRectangleBorder(
-      //                   borderRadius: BorderRadius.circular(8)),
-      //               child: ListTile(
-      //                 title: Text(TodoItem[index]),
-      //                 trailing: IconButton(
-      //                     icon: Icon(Icons.delete, color: Colors.red),
-      //                     onPressed: () {
-      //                       setState(() {
-      //                         TodoItem.removeAt(index);
-      //                       });
-      //                     }),
-      //               )));
-      //     }),
           );
   }
 }
