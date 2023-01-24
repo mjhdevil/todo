@@ -41,17 +41,12 @@ class _NoteState extends State<Note> {
                     actions: <Widget>[
                       TextButton(
                           onPressed: () {
-                            setState(() {
-                                todos.add(input);
-                                Get.back();
-                                //Navigator.of(context).pop();
-                            });
-
+                            todos.add(input);
+                            Get.back();
                           },
                           child: Text("등록")),
                       TextButton(
                           onPressed: () {
-                            setState(() {});
                             Get.back(); // 닫기
                           },
                           child: Text("닫기")),
