@@ -41,6 +41,9 @@ class _NoteState extends State<Note> {
                     actions: <Widget>[
                       TextButton(
                           onPressed: () {
+                            setState(() {
+
+                            });
                             todos.add(input);
                             Get.back();
                           },
