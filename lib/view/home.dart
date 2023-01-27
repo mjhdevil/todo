@@ -25,7 +25,9 @@ class _HomeState extends State<Home> {
         onPressed: (){
           showBottomSheet(
             context: context,
-            builder: (_) => ScheduleBottomSheet(),
+            builder: (_) => ScheduleBottomSheet(
+              selectedDate: selectedDate, // 선택된 날짜 넘겨주기
+            ),
           );
         },
         child: Icon(
